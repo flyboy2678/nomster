@@ -17,6 +17,8 @@ class ApiService {
     Map<String, String> parameters = {
       'query': searchQuery,
       'apiKey': API_KEY,
+      'addRecipeInformation': 'true',
+      'number': '20',
     };
 
     Uri uri = Uri.https(_baseURL, '/recipes/complexSearch', parameters);

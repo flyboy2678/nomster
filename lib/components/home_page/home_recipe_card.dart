@@ -56,7 +56,7 @@ class HomeRecipeCard extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
                 Column(

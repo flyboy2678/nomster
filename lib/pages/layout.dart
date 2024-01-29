@@ -24,7 +24,7 @@ class _HomePageState extends State<Layout> {
   final List<Widget> _pages = [
     const HomePage(),
     const FavouritesPage(),
-    const GroceryListPage()
+    const GroceryListPage(),
   ];
 
   @override

@@ -23,18 +23,32 @@ class RecipeSearch {
   final int id;
   final String title;
   final String image;
+  final double rating;
+  List<String> dishTypes;
+  List<String> cuisines;
 
   RecipeSearch({
     required this.id,
     required this.title,
     required this.image,
+    required this.cuisines,
+    required this.dishTypes,
+    required this.rating,
   });
 
   factory RecipeSearch.fromJson(Map<String, dynamic> json) {
+    List<dynamic> cuisinesJson = json['cuisines'];
+    List<String> cuisines = List<String>.from(cuisinesJson);
+    List<dynamic> dishTypesJson = json['dishTypes'];
+    List<String> dishTypes = List<String>.from(dishTypesJson);
+
     return RecipeSearch(
       id: json['id'] as int,
       title: json['title'] as String,
       image: json['image'] as String,
+      rating: json['spoonacularScore'] as double,
+      dishTypes: dishTypes,
+      cuisines: cuisines,
     );
   }
 }

@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:nomster/model/recipe_search_model.dart';
+import 'package:nomster/pages/search_results_page.dart';
+import 'package:nomster/services/api_service.dart';
 
 class SearchSection extends StatefulWidget {
   const SearchSection({super.key});
@@ -11,9 +14,27 @@ class SearchSection extends StatefulWidget {
 
 class _SearchSectionState extends State<SearchSection> {
   TextEditingController searchController = TextEditingController();
-  void handleSearchIconClick() {
+  void handleSearchIconClick() async {
     //come back tomorrow and resume from here
+    RecipeSearchResponse recipeSearchResponse;
+
+    String query = searchController.text;
+
+    recipeSearchResponse = await ApiService.instance.getRecipe(query);
+
+    searchController.clear();
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SearchResultsPage(
+          recipeSearchResponse: recipeSearchResponse,
+          searchQuery: query,
+        ),
+      ),
+    );
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
