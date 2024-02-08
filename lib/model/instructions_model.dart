@@ -1,41 +1,31 @@
 class InstructionResponse {
-  final StepsResponse step;
+  final List<Steps> step;
 
-  InstructionResponse({required this.step});
-
-  factory InstructionResponse.fromJson(Map<String, dynamic> json) {
-    return InstructionResponse(step: json['name']);
-  }
-}
-
-class StepsResponse {
-  final List<RecipeInstructions> results;
-
-  StepsResponse({required this.results});
-
-  factory StepsResponse.fromJson(Map<String, dynamic> json) {
-    List<dynamic> resultsJson = json['steps'];
-    List<RecipeInstructions> results = resultsJson
-        .map((result) => RecipeInstructions.fromJson(result))
-        .toList();
-
-    return StepsResponse(results: results);
-  }
-}
-
-class RecipeInstructions {
-  final int number;
-  final String instruction;
-
-  RecipeInstructions({
-    required this.number,
-    required this.instruction,
+  InstructionResponse({
+    required this.step,
   });
 
-  factory RecipeInstructions.fromJson(Map<String, dynamic> json) {
-    return RecipeInstructions(
+  factory InstructionResponse.fromJson(Map<String, dynamic> json) {
+    List<dynamic> resultsJson = json['steps'];
+    List<Steps> step =
+        resultsJson.map((result) => Steps.fromJson(result)).toList();
+    return InstructionResponse(step: step);
+  }
+}
+
+class Steps {
+  final int number;
+  final String step;
+
+  Steps({
+    required this.number,
+    required this.step,
+  });
+
+  factory Steps.fromJson(Map<String, dynamic> json) {
+    return Steps(
       number: json['number'] as int,
-      instruction: json['step'] as String,
+      step: json['step'] as String,
     );
   }
 }

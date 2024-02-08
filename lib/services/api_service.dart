@@ -102,7 +102,7 @@ class ApiService {
     }
   }
 
-  Future<InstructionResponse> getInstructions(int id) async {
+  Future<List<InstructionResponse>> getInstructions(int id) async {
     Map<String, String> parameter = {
       'apiKey': API_KEY,
     };
@@ -117,10 +117,14 @@ class ApiService {
     try {
       var response = await http.get(uri, headers: headers);
       if (response.statusCode == 200) {
-        Map<String, String> data = jsonDecode(response.body);
-        InstructionResponse instructionResponse =
-            InstructionResponse.fromJson(data);
-        return instructionResponse;
+        // Map<String, dynamic> data = jsonDecode(response.body);
+        // InstructionResponse instructionResponse =
+        //     InstructionResponse.fromJson(data);
+        //return instructionResponse;
+        List<dynamic> jsonList = json.decode(response.body);
+        return jsonList
+            .map((json) => InstructionResponse.fromJson(json))
+            .toList();
       } else {
         throw 'Request failed with status: ${response.statusCode}';
       }

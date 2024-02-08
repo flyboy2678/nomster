@@ -55,8 +55,10 @@ class _HomePageState extends State<HomePage> {
               //check if api data is done loading
               if (snapshot.connectionState == ConnectionState.waiting) {
                 //display circular loading while data is loading
-                return Center(
-                  child: CircularProgressIndicator(),
+                return Container(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               } else if (snapshot.hasError) {
                 //display error if data didnt load
@@ -70,12 +72,13 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, index) {
                       RandomRecipe recipe = recipes[index];
                       return HomeRecipeCard(
-                          image: recipe.image,
-                          title: recipe.title,
-                          rating: recipe.rating.round().toString(),
-                          id: recipe.id,
-                          cuisine: recipe.cuisines,
-                          dishType: recipe.dishTypes);
+                        image: recipe.image,
+                        title: recipe.title,
+                        rating: recipe.rating.round().toString(),
+                        id: recipe.id,
+                        cuisine: recipe.cuisines,
+                        dishType: recipe.dishTypes,
+                      );
                     },
                   ),
                 );
