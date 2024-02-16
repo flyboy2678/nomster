@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:nomster/model/instructions_model.dart';
 import 'package:nomster/model/random_recipe_model.dart';
@@ -7,16 +8,16 @@ import 'package:nomster/model/recipe_information_model.dart';
 import 'package:nomster/model/recipe_search_model.dart';
 
 class ApiService {
+  static String get apiKey => dotenv.env['API_KEY'] ?? "";
   ApiService._instantiate();
   static final ApiService instance = ApiService._instantiate();
 
   final String _baseURL = "api.spoonacular.com";
-  static const String API_KEY = "0f7c5b2a5af740599ca276d3108b994a";
 
   Future<RecipeSearchResponse> getRecipe(String searchQuery) async {
     Map<String, String> parameters = {
       'query': searchQuery,
-      'apiKey': API_KEY,
+      'apiKey': ApiService.apiKey,
       'addRecipeInformation': 'true',
       'number': '20',
     };
@@ -50,7 +51,7 @@ class ApiService {
   Future<RandomRecipeResponse> getRandomRecipe() async {
     Map<String, String> parameter = {
       'number': numberOfRandomRecipes.toString(),
-      'apiKey': API_KEY,
+      'apiKey': ApiService.apiKey,
     };
 
     Uri uri = Uri.https(_baseURL, '/recipes/random', parameter);
@@ -77,7 +78,7 @@ class ApiService {
   Future<RecipeInformationResponse> getRecipeInformation(int id) async {
     Map<String, String> parameter = {
       'includeNutrition': 'false',
-      'apiKey': API_KEY,
+      'apiKey': ApiService.apiKey,
     };
 
     Uri uri =
@@ -104,7 +105,7 @@ class ApiService {
 
   Future<List<InstructionResponse>> getInstructions(int id) async {
     Map<String, String> parameter = {
-      'apiKey': API_KEY,
+      'apiKey': ApiService.apiKey,
     };
 
     Uri uri = Uri.https(

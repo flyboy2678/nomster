@@ -44,6 +44,7 @@ class RecipeMisc extends StatelessWidget {
               ),
             ],
           ),
+          //TODO: add link to the credit text and make it orange
           Container(
             width: width * 0.25,
             child: Text(

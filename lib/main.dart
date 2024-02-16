@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:nomster/pages/on_boarding_page.dart';
 import 'package:nomster/provider/api_service_notifier.dart';
 import 'package:nomster/provider/random_recipe_data.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  await dotenv.load();
   runApp(const MyApp());
 }
 
