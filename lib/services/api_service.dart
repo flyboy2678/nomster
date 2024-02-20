@@ -46,6 +46,68 @@ class ApiService {
     }
   }
 
+  Future<RecipeSearchResponse> getRecipeType(String type) async {
+    Map<String, String> parameters = {
+      'type': type,
+      'apiKey': ApiService.apiKey,
+      'addRecipeInformation': 'true',
+      'number': '20'
+    };
+
+    Uri uri = Uri.https(_baseURL, '/recipes/complexSearch', parameters);
+
+    Map<String, String> headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+
+    try {
+      var response = await http.get(uri, headers: headers);
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        RecipeSearchResponse recipeSearchResponse =
+            RecipeSearchResponse.fromJson(data);
+        return recipeSearchResponse;
+      } else {
+        // Handle non-200 status codes
+        throw 'Request failed with status: ${response.statusCode}';
+      }
+    } catch (error) {
+      // Handle network errors
+      throw 'Error: $error';
+    }
+  }
+
+  Future<RecipeSearchResponse> getRecipeCuisine(String cuisine) async {
+    Map<String, String> parameters = {
+      'cuisine': cuisine,
+      'apiKey': ApiService.apiKey,
+      'addRecipeInformation': 'true',
+      'number': '20'
+    };
+
+    Uri uri = Uri.https(_baseURL, '/recipes/complexSearch', parameters);
+
+    Map<String, String> headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+
+    try {
+      var response = await http.get(uri, headers: headers);
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        RecipeSearchResponse recipeSearchResponse =
+            RecipeSearchResponse.fromJson(data);
+        return recipeSearchResponse;
+      } else {
+        // Handle non-200 status codes
+        throw 'Request failed with status: ${response.statusCode}';
+      }
+    } catch (error) {
+      // Handle network errors
+      throw 'Error: $error';
+    }
+  }
+
   final int numberOfRandomRecipes = 5;
 
   Future<RandomRecipeResponse> getRandomRecipe() async {
